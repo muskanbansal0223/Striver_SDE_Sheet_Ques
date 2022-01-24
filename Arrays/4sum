@@ -1,0 +1,46 @@
+class Solution {
+public:
+    // Medium, Okay!!! Lets code it!!!!
+    
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        
+        vector<vector<int>>res;
+        int n=nums.size();
+        sort(nums.begin(),nums.end());
+        
+        for(int i=0;i<n;i++) {
+                
+                int target2= target-nums[i];
+                
+                int start = i+1;
+                int end = n-1;
+                
+                while(start<end)
+                {
+                    int two_sum=nums[start]+nums[end];
+                    if (two_sum<target2)
+                        start++;
+                    else if (two_sum>target2)
+                        --end;
+                    else
+                    {// push_back to vector//
+                        vector<int> v(3,0);
+                        v[0]=nums[i];
+                        v[1]=nums[start];
+                        v[2]=nums[end];
+                         res.push_back(v);
+                    // Processing of Duplicates 3//
+                    while(start<end && nums[start]==v[1])  ++start;
+                     while(start<end  && nums[end]==v[2])  --end;
+                    
+                    }
+             
+            }
+             while(i+1<n && nums[i+1]==nums[i])  ++i;
+                    
+            
+        }
+        return res;
+        
+    }
+};
